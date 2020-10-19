@@ -1,16 +1,21 @@
-import React, { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import React, { useContext, useEffect } from "react";
+import { PostContext } from "../contexts/PostContext";
+import { getData } from "../Actions";
 
 function Issue(props) {
-  const temp = useContext(UserContext);
+  const { post, dispatch } = useContext(PostContext);
 
   const downvote = (e) => {
     console.log("downvote");
   };
 
+  useEffect(() => {
+    getData(dispatch);
+  }, []);
+
   return (
     <div>
-      {temp.map((item) => {
+      {post.map((item) => {
         return (
           <div className="post" key={item.id}>
             <h2>{item.name}</h2>
