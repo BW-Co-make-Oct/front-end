@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Header from "./Components/Header";
@@ -22,9 +23,13 @@ function App() {
     <>
       <Header />
       <div className="main">
-        <PostContextProvider>
-          <Issue upvote={upvote} />
-        </PostContextProvider>
+        <Switch>
+          <Route path="/">
+            <PostContextProvider>
+              <Issue />
+            </PostContextProvider>
+          </Route>
+        </Switch>
       </div>
     </>
   );
