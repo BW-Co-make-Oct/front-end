@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+
+import Header from "./Components/Header";
+import Issue from "./Components/Issue";
+import { UserContext } from "./contexts/UserContext";
+
+const startState = [
+  {
+    name: "Pothole",
+    desc: "Pothole please fix",
+    points: 22,
+    id: 0,
+  },
+  {
+    name: "Park is dirty",
+    desc: "Please clean the park",
+    points: 12,
+    id: 1,
+  },
+  {
+    name: "Broken mail boxes",
+    desc: "Stop people from breaking boxes, and fix the ones broken",
+    points: 5,
+    id: 2,
+  },
+];
 
 function App() {
+  const [temp, setTemp] = useState(startState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="main">
+        <UserContext.Provider value={temp}>
+          <Issue />
+        </UserContext.Provider>
+      </div>
+    </>
   );
 }
 
