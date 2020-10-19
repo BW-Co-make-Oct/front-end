@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
+import { useHistory } from "react-router-dom";
 import { getData } from "../Actions";
 
 function Issue(props) {
   const { post, dispatch } = useContext(PostContext);
+  const history = useHistory();
 
   const downvote = (e) => {
     console.log("downvote");
@@ -19,7 +21,7 @@ function Issue(props) {
         return (
           <div className="post" key={item.id}>
             <h2>{item.name}</h2>
-            <p>{item.desc}</p>
+            <p>{item.description}</p>
 
             <div className="buttons">
               <div className="votes">
@@ -42,7 +44,14 @@ function Issue(props) {
                 </button>
               </div>
               <div className="change">
-                <button className="edit">Edit</button>
+                <button
+                  className="edit"
+                  onClick={(e) => {
+                    history.push(`/edit-post/${e.target.id}`);
+                  }}
+                >
+                  Edit
+                </button>
                 <button className="close">Close</button>
               </div>
             </div>

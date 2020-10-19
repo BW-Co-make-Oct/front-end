@@ -2,18 +2,28 @@ body {
   background-color: #282c34;
   color: white;
 }
-
+/* Header */
 .mainHead {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   height: 15vh;
   background-color: grey;
 }
-.mainHead h1 {
-  margin: 1%;
+.mainHead .title {
+  margin: 0 2%;
   font-size: 3em;
+  text-decoration: none;
+  color: white;
+}
+.login {
+  font-size: 2rem;
+  margin: 0 5%;
+  text-decoration: none;
+  color: white;
 }
 
+/* Main Body */
 .main {
   display: flex;
   justify-content: center;

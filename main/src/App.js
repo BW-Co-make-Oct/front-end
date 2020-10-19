@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "./Components/Header";
 import Issue from "./Components/Issue";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import IssueEdit from "./Components/IssueEdit";
 
 import PostContextProvider from "./contexts/PostContext";
 
-import { getData } from "./Actions";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
-  const [temp, setTemp] = useState([]);
-
   const upvote = (e) => {
     console.log("upvote", e);
   };
@@ -23,13 +24,12 @@ function App() {
     <>
       <Header />
       <div className="main">
-        <Switch>
-          <Route path="/">
-            <PostContextProvider>
-              <Issue />
-            </PostContextProvider>
-          </Route>
-        </Switch>
+        <PostContextProvider>
+          <PrivateRoute path="/protected" component={Issue} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/edit-post" component={IssueEdit} />
+        </PostContextProvider>
       </div>
     </>
   );

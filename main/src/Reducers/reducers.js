@@ -9,21 +9,24 @@ import {
 const initialState = [
   {
     name: "Pothole",
-    desc: "Pothole please fix",
+    description: "Pothole please fix",
     points: 22,
     id: 0,
+    location: "or",
   },
   {
     name: "Park is dirty",
-    desc: "Please clean the park",
+    description: "Please clean the park",
     points: 12,
     id: 1,
+    location: "or",
   },
   {
     name: "Broken mail boxes",
-    desc: "Stop people from breaking boxes, and fix the ones broken",
+    description: "Stop people from breaking boxes, and fix the ones broken",
     points: 5,
     id: 2,
+    location: "or",
   },
 ];
 

@@ -1,4 +1,5 @@
-import { axiosWithAuth } from "../utils/axoisWithAuth";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+
 import { useContext } from "react";
 import { PostContext } from "../contexts/PostContext";
 
