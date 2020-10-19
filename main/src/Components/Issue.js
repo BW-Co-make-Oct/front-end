@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 
-function Issue() {
+function Issue(props) {
   const temp = useContext(UserContext);
 
-  const upvote = (e) => {
-    console.log("upvote");
-    temp.points += 1;
-  };
   const downvote = (e) => {
     console.log("downvote");
   };
@@ -25,7 +21,7 @@ function Issue() {
                 <button
                   className="upvote"
                   onClick={() => {
-                    upvote(item.id);
+                    props.upvote(item.id);
                   }}
                 >
                   Upvote

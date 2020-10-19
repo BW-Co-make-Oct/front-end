@@ -28,12 +28,20 @@ const startState = [
 
 function App() {
   const [temp, setTemp] = useState(startState);
+
+  const upvote = (e) => {
+    console.log("upvote", e);
+  };
+  const downvote = (e) => {
+    console.log("downvote");
+  };
+
   return (
     <>
       <Header />
       <div className="main">
         <UserContext.Provider value={temp}>
-          <Issue />
+          <Issue upvote={upvote} />
         </UserContext.Provider>
       </div>
     </>
