@@ -32,15 +32,14 @@ export default function Register() {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         console.log(res.data.user);
-        addUser(dispatch, res.data.user);
+        // addUser(dispatch, res.data.user);
         history.push("/protected");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       })
       .finally(() => {
         setUserData(blankData);
-        window.location.reload();
       });
   };
 

@@ -13,13 +13,6 @@ import PostContextProvider from "./contexts/PostContext";
 import PrivateRoute from "./PrivateRoute";
 
 function App() {
-  const upvote = (e) => {
-    console.log("upvote", e);
-  };
-  const downvote = (e) => {
-    console.log("downvote");
-  };
-
   return (
     <>
       <Header />

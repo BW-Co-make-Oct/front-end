@@ -7,21 +7,25 @@ function Issue(props) {
   const { post, dispatch } = useContext(PostContext);
   const history = useHistory();
 
-  const downvote = (e) => {
-    console.log("downvote");
-  };
-
   useEffect(() => {
     getData(dispatch);
   }, []);
+
+  const upvote = (e) => {
+    console.log("upvote", e);
+  };
+  const downvote = (e) => {
+    console.log("downvote");
+  };
 
   return (
     <div>
       {post["issue"] !== undefined ? (
         post["issue"].map((item) => {
+          console.log(item.id);
           return (
             <div className="post" key={item.id}>
-              <h2>{item.name}</h2>
+              <h2>{item.title}</h2>
               <p>{item.description}</p>
 
               <div className="buttons">
@@ -29,12 +33,12 @@ function Issue(props) {
                   <button
                     className="upvote"
                     onClick={() => {
-                      props.upvote(item.id);
+                      upvote(item.id);
                     }}
                   >
                     Upvote
                   </button>
-                  <h3>Votes: {item.points}</h3>
+                  <h3>Votes: {item.vote_count}</h3>
                   <button
                     className="downvote"
                     onClick={() => {

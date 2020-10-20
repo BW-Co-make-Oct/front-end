@@ -27,7 +27,6 @@ function EditIssueForm(props) {
       title: postData.name,
       location: postData.location,
       description: postData.description,
-      user_id: post["user"].id,
     };
 
     postIssue(dispatch, newPost);

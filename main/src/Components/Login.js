@@ -36,7 +36,6 @@ function Login() {
       })
       .finally(() => {
         setUserData(blankData);
-        window.location.reload();
       });
   };
 
