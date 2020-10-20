@@ -4,36 +4,31 @@ import {
   ADD_POST,
   EDIT_POST,
   SET_VOTES,
+  ADD_USER,
 } from "../Actions";
 
-const initialState = [
-  {
-    name: "Pothole",
-    description: "Pothole please fix",
-    points: 22,
-    id: 0,
-    location: "or",
-  },
-  {
-    name: "Park is dirty",
-    description: "Please clean the park",
-    points: 12,
-    id: 1,
-    location: "or",
-  },
-  {
-    name: "Broken mail boxes",
-    description: "Stop people from breaking boxes, and fix the ones broken",
-    points: 5,
-    id: 2,
-    location: "or",
-  },
-];
+const initialState = {
+  user: {},
+  issue: [],
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_DATA:
-      return initialState;
+      return {
+        ...state,
+        issue: action.payload,
+      };
+    case ADD_POST:
+      return {
+        ...state,
+        issue: action.payload,
+      };
+    case ADD_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }

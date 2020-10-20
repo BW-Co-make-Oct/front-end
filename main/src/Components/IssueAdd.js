@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { PostContext } from "../contexts/PostContext";
+import { postIssue } from "../Actions";
 
 const blankData = {
   name: "",
@@ -13,26 +14,7 @@ function EditIssueForm(props) {
   const { post, dispatch } = useContext(PostContext);
 
   const [postData, setPostData] = useState(blankData);
-  const { id } = useParams();
   const history = useHistory();
-
-  useEffect(() => {
-    console.log("CHANGE --> ", id);
-
-    axiosWithAuth()
-      .get(`//${id}`)
-      .then((res) => {
-        console.log("Action getByID --> ", res);
-        setPostData({
-          name: res.data.name,
-          location: res.data.location,
-          description: res.data.description,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const change = (e) => {
     const { name, value, checked, type } = e.target;
@@ -41,6 +23,14 @@ function EditIssueForm(props) {
   };
   const submit = (e) => {
     e.preventDefault();
+    const newPost = {
+      title: postData.name,
+      location: postData.location,
+      description: postData.description,
+      user_id: post["user"].id,
+    };
+
+    postIssue(dispatch, newPost);
     history.push("/protected");
   };
 
@@ -48,7 +38,7 @@ function EditIssueForm(props) {
     <>
       <div className="eventForm">
         <div className="divH2">
-          <h2>Edit Issue Form</h2>
+          <h2>Issue Form</h2>
         </div>
         <div className="eventFBox">
           <form onSubmit={submit}>

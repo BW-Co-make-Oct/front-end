@@ -7,7 +7,7 @@ import Issue from "./Components/Issue";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import IssueEdit from "./Components/IssueEdit";
-
+import IssueAdd from "./Components/IssueAdd";
 import PostContextProvider from "./contexts/PostContext";
 
 import PrivateRoute from "./PrivateRoute";
@@ -28,6 +28,7 @@ function App() {
           <PrivateRoute path="/protected" component={Issue} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/add-post" component={IssueAdd} />
           <Route path="/edit-post" component={IssueEdit} />
         </PostContextProvider>
       </div>

@@ -18,11 +18,13 @@ body {
 }
 .login {
   font-size: 2rem;
-  margin: 0 5%;
+  margin: 0 8%;
   text-decoration: none;
   color: white;
 }
-
+header div {
+  width: 30%;
+}
 /* Main Body */
 .main {
   display: flex;
@@ -67,4 +69,13 @@ body {
 }
 .downvote {
   background-color: red;
+}
+
+/* Login */
+.loginBut {
+  text-decoration: none;
+  padding: 2%;
+  background-color: white;
+  margin-left: 10%;
+  color: black;
 }

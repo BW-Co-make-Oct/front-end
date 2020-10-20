@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const blankData = {
   username: "",
@@ -25,7 +26,7 @@ function Login() {
   const submit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/login", userData)
+      .post("auth/login", userData)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         history.push("/protected");
@@ -35,11 +36,7 @@ function Login() {
       })
       .finally(() => {
         setUserData(blankData);
-        //temp
-        localStorage.setItem("token", "fortnite");
-        history.push("/protected");
-
-        // window.location.reload();
+        window.location.reload();
       });
   };
 
@@ -71,7 +68,10 @@ function Login() {
               </div>
               <p className="errorMsg">{formErrors.password}</p>
               <div className="itemSub">
-                <button id="subutton">Login</button>
+                <button className="loginBut">Login</button>
+                <Link to="/register" className="loginBut">
+                  Register
+                </Link>
               </div>
             </form>
           </div>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useHistory } from "react-router";
+import { PostContext } from "../contexts/PostContext";
+import { addUser } from "../Actions";
 
 const blankData = {
   username: "",
   password: "",
-  role: "",
 };
 const errorStrings = {
   username: "",
@@ -15,6 +16,7 @@ const errorStrings = {
 export default function Register() {
   const [userData, setUserData] = useState(blankData);
   const [formErrors, setFormErrors] = useState(errorStrings);
+  const { dispatch } = useContext(PostContext);
 
   const history = useHistory();
 
@@ -26,9 +28,11 @@ export default function Register() {
   const submit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/login", userData)
+      .post("/auth/register", userData)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        console.log(res.data.user);
+        addUser(dispatch, res.data.user);
         history.push("/protected");
       })
       .catch((err) => {
@@ -36,33 +40,9 @@ export default function Register() {
       })
       .finally(() => {
         setUserData(blankData);
-        //temp
-        localStorage.setItem("token", "fortnite");
-        history.push("/protected");
-
-        // window.location.reload();
+        window.location.reload();
       });
   };
-  //   const submit = (evt) => {
-  //     evt.preventDefault();
-  //     axiosWithAuth()
-  //       .post("/api/auth/register", userData)
-  //       .then((res) => {
-  //         localStorage.setItem("token", res.data.token);
-  //         console.log(res.data.token);
-  //         history.push("/protected");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       })
-  //       .finally(() => {
-  //         setUserData(blankData);
-  //         window.location.reload()
-  //       });
-  //     // addUser();
-  //     // setUserData(blankData);
-  //     console.log("UserData", userData);
-  //   };
 
   //   const validate = (name, value) => {
   //     yup
@@ -111,16 +91,6 @@ export default function Register() {
                   name="password"
                   placeholder="Password"
                   value={userData.password}
-                  onChange={change}
-                />
-              </div>
-              <p className="errorMsg">{formErrors.password}</p>
-              <div className="item">
-                <input
-                  type="text"
-                  name="role"
-                  placeholder="Role"
-                  value={userData.role}
                   onChange={change}
                 />
               </div>
