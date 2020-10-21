@@ -43,7 +43,6 @@ function EditIssueForm(props) {
       .put(`/issue/${id}`, postData)
       .then((res) => {
         getData(dispatch);
-        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);

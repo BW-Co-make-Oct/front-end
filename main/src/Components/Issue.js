@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
 import { useHistory } from "react-router-dom";
-import { getData, deletePost } from "../Actions";
+import { getData, deletePost, upvotePost, downvotePost } from "../Actions";
 
 function Issue(props) {
   const { post, dispatch } = useContext(PostContext);
@@ -12,14 +12,16 @@ function Issue(props) {
   }, []);
 
   const upvote = (e) => {
-    console.log("upvote", e);
+    // console.log("upvote", e);
+    upvotePost(dispatch, e);
   };
   const downvote = (e) => {
-    console.log("downvote");
+    console.log("downvote", e);
+    downvotePost(dispatch, e);
   };
 
   return (
-    <div>
+    <div className="postBody">
       {post["issue"] !== undefined ? (
         post["issue"].map((item) => {
           return (
@@ -37,7 +39,9 @@ function Issue(props) {
                   >
                     Upvote
                   </button>
-                  <h3>Votes: {item.vote_count}</h3>
+                  <h3>
+                    Votes: {item.vote_count === null ? 0 : item.vote_count}
+                  </h3>
                   <button
                     className="downvote"
                     onClick={() => {

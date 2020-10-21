@@ -30,7 +30,11 @@ header div {
   display: flex;
   justify-content: center;
 }
-
+.postBody {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+}
 .post {
   display: flex;
   justify-content: center;

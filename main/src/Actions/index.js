@@ -47,3 +47,53 @@ export const deletePost = (dispatch, incomData) => {
 export const addUser = (dispatch, incomData) => {
   dispatch({ type: ADD_USER, payload: incomData });
 };
+
+const getPostInfo = (id) => {
+  const info = axiosWithAuth()
+    .get(`/issue/public/post/${id}`)
+    .then((res) => {
+      const temp = {
+        title: res.data.Issue[0].title,
+        location: res.data.Issue[0].location,
+        description: res.data.Issue[0].description,
+        vote_count: res.data.Issue[0].vote_count,
+      };
+      return temp;
+    });
+  return info;
+};
+
+export const upvotePost = (dispatch, incomData) => {
+  getPostInfo(incomData).then((res) => {
+    console.log(res);
+    const newRes = {
+      ...res,
+      vote_count: res.vote_count === null ? 1 : res.vote_count + 1,
+    };
+    axiosWithAuth()
+      .put(`/issue/${incomData}`, newRes)
+      .then((res) => {
+        getData(dispatch);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+export const downvotePost = (dispatch, incomData) => {
+  getPostInfo(incomData).then((res) => {
+    console.log(res);
+    const newRes = {
+      ...res,
+      vote_count: res.vote_count === null ? -1 : res.vote_count - 1,
+    };
+    axiosWithAuth()
+      .put(`/issue/${incomData}`, newRes)
+      .then((res) => {
+        getData(dispatch);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
