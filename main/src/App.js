@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/add-post" component={IssueAdd} />
-          <Route path="/edit-post" component={IssueEdit} />
+          <Route path="/edit-post/:id" component={IssueEdit} />
         </PostContextProvider>
       </div>
     </>

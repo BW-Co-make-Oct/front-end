@@ -4,7 +4,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { PostContext } from "../contexts/PostContext";
 
 const blankData = {
-  name: "",
+  title: "",
   location: "",
   description: "",
 };
@@ -17,14 +17,11 @@ function EditIssueForm(props) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("CHANGE --> ", id);
-
     axiosWithAuth()
-      .get(`//${id}`)
+      .get(`/issue/private/${id}`)
       .then((res) => {
-        console.log("Action getByID --> ", res);
         setPostData({
-          name: res.data.name,
+          title: res.data.title,
           location: res.data.location,
           description: res.data.description,
         });
@@ -41,6 +38,14 @@ function EditIssueForm(props) {
   };
   const submit = (e) => {
     e.preventDefault();
+    axiosWithAuth()
+      .put(`/issue/${id}`, postData)
+      .then((res) => {
+        dispatch({ type: "EDIT_POST", payload: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     history.push("/protected");
   };
 
@@ -56,9 +61,9 @@ function EditIssueForm(props) {
               <label>Post Name</label>
               <input
                 type="text"
-                name="name"
-                value={postData.name}
-                placeholder={postData.name}
+                name="title"
+                value={postData.title}
+                placeholder={postData.title}
                 onChange={change}
               />
             </div>

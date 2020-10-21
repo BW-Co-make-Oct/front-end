@@ -22,7 +22,6 @@ function Issue(props) {
     <div>
       {post["issue"] !== undefined ? (
         post["issue"].map((item) => {
-          console.log(item.id);
           return (
             <div className="post" key={item.id}>
               <h2>{item.title}</h2>
@@ -52,7 +51,7 @@ function Issue(props) {
                   <button
                     className="edit"
                     onClick={(e) => {
-                      history.push(`/edit-post/${e.target.id}`);
+                      history.push(`/edit-post/${item.id}`);
                     }}
                   >
                     Edit
