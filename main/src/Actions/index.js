@@ -11,7 +11,6 @@ export const getData = (dispatch) => {
   axiosWithAuth()
     .get("/issue")
     .then((res) => {
-      console.log(res.data.data);
       dispatch({ type: GET_DATA, payload: res.data.data });
     })
     .catch((err) => {
@@ -23,8 +22,18 @@ export const postIssue = (dispatch, incomData) => {
   axiosWithAuth()
     .post("/issue", incomData)
     .then((res) => {
-      console.log(res.data.data);
       dispatch({ type: ADD_POST, payload: res.data.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const deletePost = (dispatch, incomData) => {
+  axiosWithAuth()
+    .delete(`/issue/${incomData.id}`, incomData)
+    .then((res) => {
+      getData(dispatch);
     })
     .catch((err) => {
       console.log(err);
@@ -33,4 +42,50 @@ export const postIssue = (dispatch, incomData) => {
 
 export const addUser = (dispatch, incomData) => {
   dispatch({ type: ADD_USER, payload: incomData });
+};
+
+const getPostInfo = (id) => {
+  const info = axiosWithAuth()
+    .get(`/issue/public/post/${id}`)
+    .then((res) => {
+      const temp = {
+        ...res.data.Issue[0],
+        vote_count: res.data.Issue[0].vote_count,
+      };
+      return temp;
+    });
+  return info;
+};
+
+export const upvotePost = (dispatch, incomData) => {
+  getPostInfo(incomData).then((res) => {
+    const newRes = {
+      ...res,
+      vote_count: res.vote_count === null ? 1 : res.vote_count + 1,
+    };
+    axiosWithAuth()
+      .put(`/issue/${incomData}`, newRes)
+      .then((res) => {
+        getData(dispatch);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+export const downvotePost = (dispatch, incomData) => {
+  getPostInfo(incomData).then((res) => {
+    const newRes = {
+      ...res,
+      vote_count: res.vote_count === null ? -1 : res.vote_count - 1,
+    };
+    axiosWithAuth()
+      .put(`/issue/${incomData}`, newRes)
+      .then((res) => {
+        getData(dispatch);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 };

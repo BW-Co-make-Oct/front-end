@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { PostContext } from "../contexts/PostContext";
+import { getData } from "../Actions";
 
 const blankData = {
   title: "",
@@ -18,12 +19,12 @@ function EditIssueForm(props) {
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/issue/private/${id}`)
+      .get(`/issue/public/post/${id}`)
       .then((res) => {
         setPostData({
-          title: res.data.title,
-          location: res.data.location,
-          description: res.data.description,
+          title: res.data.Issue[0].title,
+          location: res.data.Issue[0].location,
+          description: res.data.Issue[0].description,
         });
       })
       .catch((err) => {
@@ -41,7 +42,7 @@ function EditIssueForm(props) {
     axiosWithAuth()
       .put(`/issue/${id}`, postData)
       .then((res) => {
-        dispatch({ type: "EDIT_POST", payload: res.data });
+        getData(dispatch);
       })
       .catch((err) => {
         console.log(err);
@@ -51,13 +52,13 @@ function EditIssueForm(props) {
 
   return (
     <>
-      <div className="eventForm">
+      <div className="postForm">
         <div className="divH2">
           <h2>Edit Issue Form</h2>
         </div>
-        <div className="eventFBox">
+        <div className="postFBox">
           <form onSubmit={submit}>
-            <div className="eventItem">
+            <div className="postItem">
               <label>Post Name</label>
               <input
                 type="text"
@@ -68,7 +69,7 @@ function EditIssueForm(props) {
               />
             </div>
 
-            <div className="eventItem">
+            <div className="postItem">
               <label>Location</label>
               <input
                 type="text"
@@ -79,18 +80,18 @@ function EditIssueForm(props) {
               />
             </div>
 
-            <div className="eventItem">
+            <div className="postItem">
               <label>Description</label>
-              <input
-                type="text"
+              <textarea
                 name="description"
                 value={postData.description}
                 placeholder={postData.description}
                 onChange={change}
+                cols="50"
               />
             </div>
 
-            <div className="eventItemSub">
+            <div className="postItemSub">
               <button id="subutton">Submit</button>
             </div>
           </form>

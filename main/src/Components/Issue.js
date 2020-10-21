@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
-import { useHistory } from "react-router-dom";
-import { getData } from "../Actions";
+import { useHistory, Link } from "react-router-dom";
+import { getData, deletePost, upvotePost, downvotePost } from "../Actions";
 
 function Issue(props) {
   const { post, dispatch } = useContext(PostContext);
@@ -12,60 +12,85 @@ function Issue(props) {
   }, []);
 
   const upvote = (e) => {
-    console.log("upvote", e);
+    // console.log("upvote", e);
+    upvotePost(dispatch, e);
   };
   const downvote = (e) => {
-    console.log("downvote");
+    // console.log("downvote", e);
+    downvotePost(dispatch, e);
   };
 
   return (
-    <div>
-      {post["issue"] !== undefined ? (
-        post["issue"].map((item) => {
-          return (
-            <div className="post" key={item.id}>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
+    <>
+      <div className="postTitle">
+        <h2>Issue Board</h2>
+        <div className="postButton">
+          <Link to="/add-post" className="addPost">
+            Add Post
+          </Link>
+        </div>
+      </div>
+      <div className="postBody">
+        {post["issue"] !== undefined ? (
+          post["issue"].map((item) => {
+            return (
+              <div
+                style={{ order: -item.vote_count }}
+                className="post"
+                key={item.id}
+              >
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
 
-              <div className="buttons">
-                <div className="votes">
-                  <button
-                    className="upvote"
-                    onClick={() => {
-                      upvote(item.id);
-                    }}
-                  >
-                    Upvote
-                  </button>
-                  <h3>Votes: {item.vote_count}</h3>
-                  <button
-                    className="downvote"
-                    onClick={() => {
-                      downvote(item.id);
-                    }}
-                  >
-                    Downvote
-                  </button>
-                </div>
-                <div className="change">
-                  <button
-                    className="edit"
-                    onClick={(e) => {
-                      history.push(`/edit-post/${item.id}`);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button className="close">Close</button>
+                <div className="buttons">
+                  <div className="votes">
+                    <button
+                      className="upvote"
+                      onClick={() => {
+                        upvote(item.id);
+                      }}
+                    >
+                      Upvote
+                    </button>
+                    <h3>
+                      Votes: {item.vote_count === null ? 0 : item.vote_count}
+                    </h3>
+                    <button
+                      className="downvote"
+                      onClick={() => {
+                        downvote(item.id);
+                      }}
+                    >
+                      Downvote
+                    </button>
+                  </div>
+                  <div className="change">
+                    <button
+                      className="edit"
+                      onClick={() => {
+                        history.push(`/edit-post/${item.id}`);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="close"
+                      onClick={() => {
+                        deletePost(dispatch, item);
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })
-      ) : (
-        <></>
-      )}
-    </div>
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 }
 

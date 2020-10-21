@@ -29,6 +29,11 @@ export default (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case EDIT_POST:
+      return {
+        ...state,
+        issue: action.payload,
+      };
     default:
       return state;
   }

@@ -86,7 +86,7 @@ export default function Register() {
               <p className="errorMsg">{formErrors.username}</p>
               <div className="item">
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="Password"
                   value={userData.password}

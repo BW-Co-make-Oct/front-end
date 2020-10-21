@@ -8,39 +8,97 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 15vh;
-  background-color: grey;
+  background: rgb(255, 244, 0);
+  background: linear-gradient(
+    114deg,
+    rgba(255, 244, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(255, 244, 0, 1) 20%,
+    rgba(255, 244, 0, 1) 30%,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(255, 244, 0, 1) 40%,
+    rgba(255, 244, 0, 1) 50%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(255, 244, 0, 1) 60%,
+    rgba(255, 244, 0, 1) 70%,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(255, 244, 0, 1) 80%,
+    rgba(255, 244, 0, 1) 90%,
+    rgba(0, 0, 0, 1) 90%
+  );
+  border-bottom: solid 5px black;
 }
 .mainHead .title {
   margin: 0 2%;
   font-size: 3em;
   text-decoration: none;
-  color: white;
+  color: black;
+  background-color: burlywood;
+  padding: 1%;
+  font-weight: bold;
+  border-radius: 20px;
 }
 .login {
   font-size: 2rem;
-  margin: 0 8%;
+  margin: 0 10%;
   text-decoration: none;
-  color: white;
+  color: black;
+  background-color: burlywood;
+  padding: 1%;
+  font-weight: bold;
+  border-radius: 20px;
 }
+
 header div {
   width: 30%;
 }
 /* Main Body */
 .main {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-flow: column;
 }
-
+.postButton {
+  margin: 2%;
+}
+.addPost {
+  font-size: 2rem;
+  text-decoration: none;
+  color: red;
+  background-color: black;
+  padding: 1%;
+  border-radius: 25px;
+}
+.postTitle {
+  text-align: center;
+  font-size: 3rem;
+  width: 100%;
+}
+.postBody {
+  width: 50%;
+  display: flex;
+  flex-flow: column;
+}
 .post {
   display: flex;
   justify-content: center;
   flex-flow: column;
-  border: 2px white solid;
+  background-color: burlywood;
+  border: 5px black solid;
   text-align: center;
   margin: 5%;
+  color: black;
+  border-radius: 25px;
 }
 .post h2 {
-  font-size: 2rem;
+  font-size: 3rem;
+}
+.post p {
+  font-size: 2.5rem;
 }
 
 .buttons {
@@ -48,11 +106,17 @@ header div {
   display: flex;
   flex-flow: column;
 }
-
+.change {
+  display: flex;
+  justify-content: space-between;
+}
 .change button {
   background-color: black;
   color: white;
   border: 1px white solid;
+  padding: 1%;
+  font-size: 1.1rem;
+  border-radius: 15px;
 }
 
 .votes {
@@ -78,4 +142,24 @@ header div {
   background-color: white;
   margin-left: 10%;
   color: black;
+}
+
+/* Forms */
+.postForm {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  background-color: burlywood;
+  color: black;
+  margin: 5%;
+  padding: 2%;
+  border-radius: 20px;
+  border: black 3px solid;
+}
+
+.postItem {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-bottom: 5%;
 }
