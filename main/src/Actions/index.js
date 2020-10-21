@@ -31,6 +31,19 @@ export const postIssue = (dispatch, incomData) => {
     });
 };
 
+export const deletePost = (dispatch, incomData) => {
+  axiosWithAuth()
+    .delete(`/issue/${incomData.id}`, incomData)
+    .then((res) => {
+      console.log(res.data);
+      getData(dispatch);
+      // window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const addUser = (dispatch, incomData) => {
   dispatch({ type: ADD_USER, payload: incomData });
 };

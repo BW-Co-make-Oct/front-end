@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { PostContext } from "../contexts/PostContext";
+import { getData } from "../Actions";
 
 const blankData = {
   title: "",
@@ -18,12 +19,12 @@ function EditIssueForm(props) {
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/issue/private/${id}`)
+      .get(`/issue/public/post/${id}`)
       .then((res) => {
         setPostData({
-          title: res.data.title,
-          location: res.data.location,
-          description: res.data.description,
+          title: res.data.Issue[0].title,
+          location: res.data.Issue[0].location,
+          description: res.data.Issue[0].description,
         });
       })
       .catch((err) => {
@@ -41,7 +42,8 @@ function EditIssueForm(props) {
     axiosWithAuth()
       .put(`/issue/${id}`, postData)
       .then((res) => {
-        dispatch({ type: "EDIT_POST", payload: res.data });
+        getData(dispatch);
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);

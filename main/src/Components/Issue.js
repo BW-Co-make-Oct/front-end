@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
 import { useHistory } from "react-router-dom";
-import { getData } from "../Actions";
+import { getData, deletePost } from "../Actions";
 
 function Issue(props) {
   const { post, dispatch } = useContext(PostContext);
@@ -50,13 +50,20 @@ function Issue(props) {
                 <div className="change">
                   <button
                     className="edit"
-                    onClick={(e) => {
+                    onClick={() => {
                       history.push(`/edit-post/${item.id}`);
                     }}
                   >
                     Edit
                   </button>
-                  <button className="close">Close</button>
+                  <button
+                    className="close"
+                    onClick={() => {
+                      deletePost(dispatch, item);
+                    }}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
