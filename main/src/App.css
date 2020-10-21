@@ -30,29 +30,29 @@ body {
     rgba(255, 244, 0, 1) 90%,
     rgba(0, 0, 0, 1) 90%
   );
+  border-bottom: solid 5px black;
 }
 .mainHead .title {
   margin: 0 2%;
   font-size: 3em;
   text-decoration: none;
-  color: red;
-  background-color: white;
+  color: black;
+  background-color: burlywood;
   padding: 1%;
   font-weight: bold;
   border-radius: 20px;
 }
 .login {
   font-size: 2rem;
-  margin: 0 8%;
+  margin: 0 10%;
   text-decoration: none;
-  color: yellow;
+  color: black;
+  background-color: burlywood;
+  padding: 1%;
+  font-weight: bold;
+  border-radius: 20px;
 }
-.addPost {
-  font-size: 2rem;
-  margin: 0 8%;
-  text-decoration: none;
-  color: red;
-}
+
 header div {
   width: 30%;
 }
@@ -62,10 +62,20 @@ header div {
   align-items: center;
   flex-flow: column;
 }
+.postButton {
+  margin: 2%;
+}
+.addPost {
+  font-size: 2rem;
+  text-decoration: none;
+  color: red;
+  background-color: black;
+  padding: 1%;
+  border-radius: 25px;
+}
 .postTitle {
   text-align: center;
   font-size: 3rem;
-  border-bottom: 5px black solid;
   width: 100%;
 }
 .postBody {
@@ -77,9 +87,12 @@ header div {
   display: flex;
   justify-content: center;
   flex-flow: column;
-  border: 2px white solid;
+  background-color: burlywood;
+  border: 5px black solid;
   text-align: center;
   margin: 5%;
+  color: black;
+  border-radius: 25px;
 }
 .post h2 {
   font-size: 3rem;
@@ -93,11 +106,17 @@ header div {
   display: flex;
   flex-flow: column;
 }
-
+.change {
+  display: flex;
+  justify-content: space-between;
+}
 .change button {
   background-color: black;
   color: white;
   border: 1px white solid;
+  padding: 1%;
+  font-size: 1.1rem;
+  border-radius: 15px;
 }
 
 .votes {
@@ -123,4 +142,24 @@ header div {
   background-color: white;
   margin-left: 10%;
   color: black;
+}
+
+/* Forms */
+.postForm {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  background-color: burlywood;
+  color: black;
+  margin: 5%;
+  padding: 2%;
+  border-radius: 20px;
+  border: black 3px solid;
+}
+
+.postItem {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  margin-bottom: 5%;
 }

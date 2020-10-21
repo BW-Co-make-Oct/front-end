@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { PostContext } from "../contexts/PostContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { getData, deletePost, upvotePost, downvotePost } from "../Actions";
 
 function Issue(props) {
@@ -24,6 +24,11 @@ function Issue(props) {
     <>
       <div className="postTitle">
         <h2>Issue Board</h2>
+        <div className="postButton">
+          <Link to="/add-post" className="addPost">
+            Add Post
+          </Link>
+        </div>
       </div>
       <div className="postBody">
         {post["issue"] !== undefined ? (

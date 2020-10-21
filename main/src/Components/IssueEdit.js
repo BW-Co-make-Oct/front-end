@@ -52,13 +52,13 @@ function EditIssueForm(props) {
 
   return (
     <>
-      <div className="eventForm">
+      <div className="postForm">
         <div className="divH2">
           <h2>Edit Issue Form</h2>
         </div>
-        <div className="eventFBox">
+        <div className="postFBox">
           <form onSubmit={submit}>
-            <div className="eventItem">
+            <div className="postItem">
               <label>Post Name</label>
               <input
                 type="text"
@@ -69,7 +69,7 @@ function EditIssueForm(props) {
               />
             </div>
 
-            <div className="eventItem">
+            <div className="postItem">
               <label>Location</label>
               <input
                 type="text"
@@ -80,18 +80,18 @@ function EditIssueForm(props) {
               />
             </div>
 
-            <div className="eventItem">
+            <div className="postItem">
               <label>Description</label>
-              <input
-                type="text"
+              <textarea
                 name="description"
                 value={postData.description}
                 placeholder={postData.description}
                 onChange={change}
+                cols="50"
               />
             </div>
 
-            <div className="eventItemSub">
+            <div className="postItemSub">
               <button id="subutton">Submit</button>
             </div>
           </form>

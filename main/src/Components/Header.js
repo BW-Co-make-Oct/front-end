@@ -6,14 +6,9 @@ function Header() {
       <Link to="/protected" className="title">
         Co-Make
       </Link>
-      <div>
-        <Link to="/login" className="login">
-          Login
-        </Link>
-        <Link to="/add-post" className="addPost">
-          Add Post
-        </Link>
-      </div>
+      <Link to="/login" className="login">
+        Login
+      </Link>
     </header>
   );
 }
