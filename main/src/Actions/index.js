@@ -11,7 +11,6 @@ export const getData = (dispatch) => {
   axiosWithAuth()
     .get("/issue")
     .then((res) => {
-      console.log(res.data.data);
       dispatch({ type: GET_DATA, payload: res.data.data });
     })
     .catch((err) => {
@@ -23,7 +22,6 @@ export const postIssue = (dispatch, incomData) => {
   axiosWithAuth()
     .post("/issue", incomData)
     .then((res) => {
-      console.log(res.data.data);
       dispatch({ type: ADD_POST, payload: res.data.data });
     })
     .catch((err) => {
@@ -35,9 +33,7 @@ export const deletePost = (dispatch, incomData) => {
   axiosWithAuth()
     .delete(`/issue/${incomData.id}`, incomData)
     .then((res) => {
-      console.log(res.data);
       getData(dispatch);
-      // window.location.reload();
     })
     .catch((err) => {
       console.log(err);
@@ -53,9 +49,7 @@ const getPostInfo = (id) => {
     .get(`/issue/public/post/${id}`)
     .then((res) => {
       const temp = {
-        title: res.data.Issue[0].title,
-        location: res.data.Issue[0].location,
-        description: res.data.Issue[0].description,
+        ...res.data.Issue[0],
         vote_count: res.data.Issue[0].vote_count,
       };
       return temp;
@@ -65,7 +59,6 @@ const getPostInfo = (id) => {
 
 export const upvotePost = (dispatch, incomData) => {
   getPostInfo(incomData).then((res) => {
-    console.log(res);
     const newRes = {
       ...res,
       vote_count: res.vote_count === null ? 1 : res.vote_count + 1,
@@ -82,7 +75,6 @@ export const upvotePost = (dispatch, incomData) => {
 };
 export const downvotePost = (dispatch, incomData) => {
   getPostInfo(incomData).then((res) => {
-    console.log(res);
     const newRes = {
       ...res,
       vote_count: res.vote_count === null ? -1 : res.vote_count - 1,

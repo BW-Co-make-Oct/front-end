@@ -10,7 +10,7 @@ function Header() {
         <Link to="/login" className="login">
           Login
         </Link>
-        <Link to="/add-post" className="login">
+        <Link to="/add-post" className="addPost">
           Add Post
         </Link>
       </div>
