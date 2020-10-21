@@ -1,48 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "./Components/Header";
 import Issue from "./Components/Issue";
-import { UserContext } from "./contexts/UserContext";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import IssueEdit from "./Components/IssueEdit";
+import IssueAdd from "./Components/IssueAdd";
+import PostContextProvider from "./contexts/PostContext";
 
-const startState = [
-  {
-    name: "Pothole",
-    desc: "Pothole please fix",
-    points: 22,
-    id: 0,
-  },
-  {
-    name: "Park is dirty",
-    desc: "Please clean the park",
-    points: 12,
-    id: 1,
-  },
-  {
-    name: "Broken mail boxes",
-    desc: "Stop people from breaking boxes, and fix the ones broken",
-    points: 5,
-    id: 2,
-  },
-];
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
-  const [temp, setTemp] = useState(startState);
-
-  const upvote = (e) => {
-    console.log("upvote", e);
-  };
-  const downvote = (e) => {
-    console.log("downvote");
-  };
-
   return (
     <>
       <Header />
       <div className="main">
-        <UserContext.Provider value={temp}>
-          <Issue upvote={upvote} />
-        </UserContext.Provider>
+        <PostContextProvider>
+          <PrivateRoute path="/protected" component={Issue} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/add-post" component={IssueAdd} />
+          <Route path="/edit-post/:id" component={IssueEdit} />
+        </PostContextProvider>
       </div>
     </>
   );
